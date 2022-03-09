@@ -68,7 +68,7 @@ class downloader(object):
         mjdStart=False,
         mjdEnd=False,
         window=False
-    ).get() 
+    ).get()
     ```
 
     """
@@ -156,6 +156,7 @@ class downloader(object):
         allStacks, allWarps, colorImage = self.parse_html_for_image_urls_and_metadata(
             content=content
         )
+        self.allStacks=allStacks
 
         # GENERATE A DIRECTORY NAME IF ON DOWNLOAD DIRECTORY SPECIFIED
         if not self.downloadDirectory:
@@ -184,8 +185,8 @@ class downloader(object):
             downloadDirectory = self.downloadDirectory
 
         # RECURSIVELY CREATE MISSING DIRECTORIES
-        if not os.path.exists(downloadDirectory):
-            os.makedirs(downloadDirectory)
+        #if not os.path.exists(downloadDirectory):
+            #os.makedirs(downloadDirectory)
 
         # IF SINGLE FILTER STAMPS HAVE BEEN REQUESTED
         if self.singleFilters:
@@ -199,11 +200,11 @@ class downloader(object):
                         t + ".fits" for t in images["filenames"]]
                     urls += images["fits"]
 
-                fitsPaths += self._download_images(
-                    urls=urls,
-                    filenames=fitsFilenames,
-                    downloadDirectory=downloadDirectory
-                )
+                #fitsPaths += self._download_images(
+                #    urls=urls,
+                #    filenames=fitsFilenames,
+                #    downloadDirectory=downloadDirectory
+                #)
 
                 # DOWNLOAD THE JPEGS FILES?
                 urls = []
@@ -213,22 +214,22 @@ class downloader(object):
                         t + ".jpeg" for t in images["filenames"]]
                     urls += images["jpegs"]
 
-                jpegPaths += self._download_images(
-                    urls=urls,
-                    filenames=jpegFilenames,
-                    downloadDirectory=downloadDirectory
-                )
+                #jpegPaths += self._download_images(
+                #    urls=urls,
+                #    filenames=jpegFilenames,
+                #    downloadDirectory=downloadDirectory
+                #)
 
         # IF COLOR STAMPS HAS BEEN REQUESTED
         if self.color:
             theseFilenames = []
             theseFilenames[:] = [t + ".jpeg" for t in colorImage["filename"]]
 
-            colorPath += self._download_images(
-                urls=colorImage["jpeg"],
-                filenames=theseFilenames,
-                downloadDirectory=downloadDirectory
-            )
+            #colorPath += self._download_images(
+            #    urls=colorImage["jpeg"],
+            #    filenames=theseFilenames,
+            #    downloadDirectory=downloadDirectory
+            #)
 
         self.log.debug('completed the ``get`` method')
 
@@ -271,7 +272,7 @@ class downloader(object):
             mjdStart=False,
             mjdEnd=False,
             window=False
-        ).get_html_content() 
+        ).get_html_content()
 
         print(status_code)
         # OUT: 200
@@ -352,7 +353,7 @@ class downloader(object):
             mjdEnd=False,
             window=False
         )
-        content, status_code, url = mydownloader.get_html_content() 
+        content, status_code, url = mydownloader.get_html_content()
 
         allStacks, allWarps, colorImage = mydownloader.parse_html_for_image_urls_and_metadata(content=content)
 
@@ -606,23 +607,23 @@ class downloader(object):
         - ``localUrls`` -- list of the paths to local image files
 
         """
-        self.log.debug('starting the ``_download_images`` method')
+        #self.log.debug('starting the ``_download_images`` method')
 
-        from fundamentals.download.multiobject_download import multiobject_download
-        localUrls = multiobject_download(
-            urlList=urls,
-            # directory(ies) to download the documents to - can be one url or a
-            # list of urls the same length as urlList
-            downloadDirectory=downloadDirectory,
-            log=self.log,
-            timeStamp=0,
-            timeout=180,
-            concurrentDownloads=10,
-            resetFilename=filenames,
-            credentials=False,  # { 'username' : "...", "password", "..." }
-            longTime=False,
-            indexFilenames=False
-        )
+        #from fundamentals.download.multiobject_download import multiobject_download
+        #localUrls = multiobject_download(
+        #    urlList=urls,
+        #    # directory(ies) to download the documents to - can be one url or a
+        #    # list of urls the same length as urlList
+        #    downloadDirectory=downloadDirectory,
+        #    log=self.log,
+        #    timeStamp=0,
+        #    timeout=180,
+        #    concurrentDownloads=10,
+        #    resetFilename=filenames,
+        #    credentials=False,  # { 'username' : "...", "password", "..." }
+        #    longTime=False,
+        #    indexFilenames=False
+        #)
 
-        self.log.debug('completed the ``_download_images`` method')
-        return localUrls
+        #self.log.debug('completed the ``_download_images`` method')
+        #return localUrls

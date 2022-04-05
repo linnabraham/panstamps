@@ -233,9 +233,9 @@ class downloader(object):
 
         self.log.debug('completed the ``get`` method')
 
-        if len(fitsPaths + jpegPaths + colorPath) == 0:
-            self.log.warning(
-                "No images found. Your options may not be set correctly. Here's the requested URL:\n%(url)s" % locals())
+#         if len(fitsPaths + jpegPaths + colorPath) == 0:
+            # self.log.warning(
+                # "No images found. Your options may not be set correctly. Here's the requested URL:\n%(url)s" % locals())
 
         return fitsPaths, jpegPaths, colorPath
 

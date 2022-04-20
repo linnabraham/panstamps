@@ -293,10 +293,10 @@ class downloader(object):
         if self.color:
             filterSet.append("color")
 
-        fitsSize = int(self.arcsecSize * 1)
+        fitsSize = int(self.arcsecSize * 4)
         jpegSize = fitsSize
-        #if jpegSize < 1200:
-        #    jpegSize = 1200
+        if jpegSize < 1200:
+           jpegSize = 1200
 
         try:
             response = requests.get(

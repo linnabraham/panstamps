@@ -306,7 +306,7 @@ class downloader(object):
                     "filter": filterSet,
                     "filetypes": self.imageType,
                     "size": fitsSize,
-                    "output_size": jpegSize,
+                    "output_size": "0",
                     "verbose": "0",
                     "autoscale": "99.500000",
                     "catlist": "",

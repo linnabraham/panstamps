@@ -314,6 +314,9 @@ class downloader(object):
             )
         except requests.exceptions.RequestException:
             print('HTTP Request failed')
+        # fix for UnboundLocalError: local variable 'response' referenced before assignment
+        else:
+            assert response.status_code == 200
 
         self.log.debug('completed the ``get_html_content`` method')
         return str(response.content), response.status_code, str(response.url)
